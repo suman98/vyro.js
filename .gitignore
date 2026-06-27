@@ -5,5 +5,5 @@ packages
 *.tgz
 .playground
 .serena
-test/real
 test/temp
+test/parcel
