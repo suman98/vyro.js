@@ -85,11 +85,10 @@ writeFileSync(
         react: '^18.3.1',
         'react-dom': '^18.3.1',
         vue: '^3.5.0',
-        '@vyro/bridge': 'latest',
       },
       devDependencies: {
         vite: '^6.0.0',
-        'vyro-js-plugin': 'latest',
+        'vyro-js-plugin': 'github:suman98/vyro.js',
         sass: '^1.0.0',
         ...(useTs
           ? {
@@ -116,6 +115,3 @@ console.log('    src/pages/index.html          →  /')
 console.log('    src/pages/about.html          →  /about')
 console.log('    src/pages/blog/index.vue      →  /blog')
 console.log(`    src/pages/profile/index.${useTs ? 'tsx' : 'jsx'}  →  /profile\n`)
-console.log('  Bridge (mix React + Vue):')
-console.log("    npm install @vyro/bridge")
-console.log(`    import { reactToVue, vueToReact } from '@vyro/bridge'\n`)
