@@ -5,6 +5,7 @@ import { mkdirSync, writeFileSync, cpSync, existsSync, readdirSync } from 'fs'
 import { createInterface } from 'readline'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
+import { spawnSync } from 'child_process'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -104,11 +105,18 @@ writeFileSync(
   ),
 )
 
+// Install dependencies
+console.log('  Installing dependencies...\n')
+const install = spawnSync('npm', ['install'], { cwd: dest, stdio: 'inherit' })
+if (install.status !== 0) {
+  console.error('\n  npm install failed. Run it manually:\n')
+  console.error(`    cd ${name} && npm install\n`)
+  process.exit(install.status ?? 1)
+}
+
 // Success output
-console.log('  Done!\n')
-console.log('  Next steps:\n')
+console.log(`\n  Done! Start your app:\n`)
 console.log(`    cd ${name}`)
-console.log('    npm install')
 console.log('    npm run dev\n')
 console.log('  File → route mapping:')
 console.log('    src/pages/index.html          →  /')
