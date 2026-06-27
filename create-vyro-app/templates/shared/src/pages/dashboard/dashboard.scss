@@ -4,8 +4,10 @@ body {
   font-family: system-ui, sans-serif;
   background: #0f0f11;
   color: #e2e2e8;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
 }
+
+.page { max-width: 900px; }
 
 h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
 
@@ -36,6 +38,34 @@ h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
   letter-spacing: 0.1em;
   color: #555;
   margin-bottom: 0.75rem;
+}
+
+.info-card {
+  background: #1a1a2e;
+  border: 1px solid #4ade8044;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  max-width: 420px;
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  code {
+    color: #a78bfa;
+    background: #0f0f1a;
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #4ade80;
+    font-size: 0.85rem;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
 }
 
 .react-counter {
@@ -95,9 +125,10 @@ h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
   }
 }
 
-a {
+.back {
   color: #a78bfa;
   font-size: 0.85rem;
   display: inline-block;
   margin-top: 2rem;
+  text-decoration: none;
 }

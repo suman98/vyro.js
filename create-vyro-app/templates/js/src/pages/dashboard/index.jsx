@@ -1,17 +1,12 @@
 import './dashboard.scss'
-import { vueToReact } from '@vyro/bridge'
-import ReactCounter   from '@/components/ReactCounter'
-import VueCard        from '@/components/VueCard.vue'
-
-// Wrap Vue component so it can render inside React JSX
-const Card = vueToReact(VueCard)
+import ReactCounter from '@/components/ReactCounter'
 
 export default function Dashboard() {
   return (
-    <div>
+    <div className="page">
       <h1>Dashboard</h1>
       <p className="subtitle">
-        React + Vue together via <code>@vyro/bridge</code>
+        React page — <code>.tsx</code> / <code>.jsx</code> files in <code>src/pages/</code> become routes.
       </p>
 
       <div className="grid">
@@ -21,19 +16,15 @@ export default function Dashboard() {
         </div>
 
         <div>
-          <p className="section-label">Vue component inside React</p>
-          {/*
-            VueCard is a .vue file — vueToReact() wraps it so it renders
-            in React JSX. Props stay in sync on every re-render.
-          */}
-          <Card
-            title="Vue Card"
-            description="This Vue component is rendered inside a React page using vueToReact from @vyro/bridge."
-          />
+          <p className="section-label">Vue page</p>
+          <div className="info-card">
+            <p>Drop a <code>.vue</code> file into <code>src/pages/</code> for a Vue route.</p>
+            <a className="link" href="/vue">→ View Vue demo</a>
+          </div>
         </div>
       </div>
 
-      <a href="/">← Home</a>
+      <a className="back" href="/">← Home</a>
     </div>
   )
 }
