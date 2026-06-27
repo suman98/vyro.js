@@ -8,9 +8,14 @@
 </head>
 <body>
   <div class="hero">
-    <h1>Welcome to <span>VyroJs</span></h1>
+    <h1>Welcome to <span onclick="test()">VyroJs</span></h1>
     <p>Zero-config MPA framework powered by Vite.</p>
     <p>Edit <code>src/pages/index.html</code> to get started.</p>
   </div>
 </body>
+<script>
+  function test() {
+    alert('Hello I am VyroJs')
+  }
+</script>
 </html>
