@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTE Reading Practice</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#07090f;
+  --s1:#0e1117;--s2:#141820;--s3:#1a1f2e;
+  --b1:#1f2535;--b2:#252d40;--b3:#2e3850;
+  --blue:#4f8ef7;--blue2:#3b7aee;--blue-glow:rgba(79,142,247,.18);
+  --text:#e8edf8;--text2:#9aa5c0;--text3:#5a6580;
+  --green:#34d399;--green-bg:rgba(52,211,153,.1);--green-border:rgba(52,211,153,.25);
+  --red:#f87171;--red-bg:rgba(248,113,113,.1);--red-border:rgba(248,113,113,.25);
+  --orange:#fb923c;--orange-bg:rgba(184, 119, 66, 0.1);--orange-border:rgba(251,146,60,.25);
+  --purple:#a78bfa;--purple-bg:rgba(167,139,250,.1);--purple-border:rgba(167,139,250,.25);
+  --teal:#2dd4bf;--teal-bg:rgba(45,212,191,.1);--teal-border:rgba(45,212,191,.25);
+  --gold:#f0c040;
+  --radius:12px;--radius-sm:8px;--radius-lg:16px;--radius-xl:20px;
+  --shadow:0 4px 24px rgba(0,0,0,.4);--shadow-lg:0 8px 40px rgba(0,0,0,.5);
+}
+:root.light{
+  --bg:#f1f5fb;--s1:#ffffff;--s2:#f7f9fd;--s3:#eef2fa;
+  --b1:#dde4f0;--b2:#c8d3e8;--b3:#b0bdd8;
+  --blue:#2563eb;--blue2:#1d55d4;--blue-glow:rgba(37,99,235,.12);
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --green:#16a34a;--green-bg:rgba(22,163,74,.08);--green-border:rgba(22,163,74,.2);
+  --red:#dc2626;--red-bg:rgba(220,38,38,.08);--red-border:rgba(220,38,38,.2);
+  --orange:#d97706;--orange-bg:rgba(217,119,6,.08);--orange-border:rgba(217,119,6,.2);
+  --purple:#7c3aed;--purple-bg:rgba(124,58,237,.08);--purple-border:rgba(124,58,237,.2);
+  --teal:#0d9488;--teal-bg:rgba(13,148,136,.08);--teal-border:rgba(13,148,136,.2);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px}
+
+/* ── HEADER ── */
+.hdr{height:56px;background:var(--s1);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.hdr-brand{display:flex;align-items:center;gap:10px}
+.hdr-logo{font-size:1.05rem;font-weight:800;color:var(--blue);letter-spacing:-.5px}
+.hdr-logo em{color:var(--text);font-style:normal}
+.hdr-pill{font-size:.65rem;font-weight:700;background:var(--blue-glow);color:var(--blue);border:1px solid rgba(79,142,247,.3);padding:3px 9px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.hdr-key{display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--b1);padding:5px 12px;border-radius:var(--radius-sm);font-size:.75rem;color:var(--text2);cursor:pointer;transition:all .15s}
+.hdr-key:hover{border-color:var(--blue);color:var(--text)}
+.kdot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.icon-btn{background:var(--s2);border:1px solid var(--b1);border-radius:var(--radius-sm);padding:6px 10px;cursor:pointer;font-size:.95rem;color:var(--text);transition:all .15s;line-height:1}
+.icon-btn:hover{border-color:var(--blue);background:var(--blue-glow)}
+
+/* ── LAYOUT ── */
+.pg{max-width:920px;margin:0 auto;padding:36px 24px 80px}
+
+/* ── SETUP ── */
+#setup-screen{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 56px);padding:24px}
+.setup-wrap{width:100%;max-width:460px}
+.setup-logo-row{text-align:center;margin-bottom:32px}
+.setup-biglogo{font-size:2rem;font-weight:800;color:var(--blue);letter-spacing:-1px;margin-bottom:4px}
+.setup-biglogo em{color:var(--text);font-style:normal}
+.setup-sub{font-size:.87rem;color:var(--text2)}
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--radius-xl);padding:32px}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.card-sub{font-size:.82rem;color:var(--text2);margin-bottom:24px;line-height:1.55}
+.field-lbl{font-size:.7rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.inp-wrap{position:relative;margin-bottom:16px}
+.inp{width:100%;padding:11px 42px 11px 14px;background:var(--s2);border:1.5px solid var(--b2);border-radius:var(--radius-sm);color:var(--text);font-size:.88rem;font-family:inherit;transition:border-color .15s,box-shadow .15s;outline:none}
+.inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.inp::placeholder{color:var(--text3)}
+.vis-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);cursor:pointer;font-size:.9rem;padding:2px}
+.vis-btn:hover{color:var(--text)}
+.saved-tag{display:flex;align-items:center;justify-content:space-between;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:14px;font-size:.8rem}
+.saved-tag span{color:var(--green);display:flex;align-items:center;gap:6px}
+.clear-link{background:none;border:none;color:var(--green);font-size:.75rem;cursor:pointer;text-decoration:underline;font-family:inherit;opacity:.8}
+.clear-link:hover{opacity:1}
+.setup-divider{display:flex;align-items:center;gap:10px;margin:20px 0}
+.setup-divider hr{flex:1;border:none;border-top:1px solid var(--b1)}
+.setup-divider span{font-size:.7rem;color:var(--text3);white-space:nowrap}
+.task-chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:.68rem;padding:3px 9px;border-radius:20px;background:var(--s2);border:1px solid var(--b2);color:var(--text3)}
+.err-box{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red);padding:10px 13px;border-radius:var(--radius-sm);margin-bottom:14px;font-size:.82rem}
+
+/* ── BUTTONS ── */
+.btn{padding:10px 20px;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:.86rem;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.btn-primary{background:var(--blue);color:#fff;width:100%;justify-content:center;box-shadow:0 2px 12px var(--blue-glow)}
+.btn-primary:hover:not(:disabled){background:var(--blue2);transform:translateY(-1px);box-shadow:0 4px 20px rgba(79,142,247,.35)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--b2)}
+.btn-ghost:hover:not(:disabled){background:var(--s2);color:var(--text);border-color:var(--blue)}
+.btn-success{background:var(--green);color:#0a1a12;font-weight:700}
+.btn-success:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}
+.btn-regen{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border)}
+.btn-regen:hover:not(:disabled){background:var(--orange);color:#fff;transform:translateY(-1px)}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.btn-danger:hover{background:var(--red);color:#fff}
+.btn-sm{padding:6px 12px;font-size:.78rem;border-radius:6px}
+.btn-xs{padding:4px 10px;font-size:.72rem;border-radius:6px}
+
+/* ── TASK SCREEN ── */
+.pg-head{margin-bottom:28px}
+.pg-head h2{font-size:1.3rem;font-weight:800;letter-spacing:-.4px;margin-bottom:4px}
+.pg-head p{font-size:.84rem;color:var(--text2)}
+
+/* Score bar */
+.score-bar{display:grid;grid-template-columns:repeat(3,1fr);background:var(--s1);border:1px solid var(--b1);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px;box-shadow:var(--shadow)}
+.sc{padding:16px 20px;text-align:center}
+.sc+.sc{border-left:1px solid var(--b1)}
+.sc .v{font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.sc .l{font-size:.65rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
+.v-blue{color:var(--blue)}.v-green{color:var(--green)}.v-orange{color:var(--orange)}.v-red{color:var(--red)}
+
+/* Config row */
+.config-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:640px){.config-row{grid-template-columns:1fr}}
+.config-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--radius-lg);padding:20px}
+.config-card-title{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:14px}
+.config-card-title .icon{width:28px;height:28px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:.85rem}
+
+/* Score system toggle */
+.seg-ctrl{display:flex;background:var(--s2);border:1px solid var(--b1);border-radius:var(--radius-sm);padding:3px;gap:3px;margin-bottom:14px}
+.seg-btn{flex:1;padding:6px;border:none;border-radius:6px;font-family:inherit;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--text2);background:transparent}
+.seg-btn.active{background:var(--blue);color:#fff;box-shadow:0 1px 6px var(--blue-glow)}
+
+/* Band select */
+.select{width:100%;background:var(--s2);border:1.5px solid var(--b2);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:.86rem;padding:9px 12px;cursor:pointer;transition:border-color .15s,box-shadow .15s;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6580' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.select:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.select option{background:var(--s1);color:var(--text)}
+.band-desc-box{background:var(--blue-glow);border:1px solid rgba(79,142,247,.2);border-radius:var(--radius-sm);padding:10px 13px;font-size:.77rem;color:var(--text2);margin-top:10px;line-height:1.55}
+.band-desc-box strong{color:var(--text)}
+
+/* Topic */
+.textarea{width:100%;background:var(--s2);border:1.5px solid var(--b2);border-radius:var(--radius-sm);color:var(--text);font-size:.85rem;font-family:inherit;padding:10px 13px;resize:vertical;min-height:80px;line-height:1.6;transition:border-color .15s,box-shadow .15s;outline:none}
+.textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.textarea::placeholder{color:var(--text3)}
+
+/* Task grid */
+.task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.tc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--radius-lg);padding:20px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.tc::after{content:'';position:absolute;inset:0;border-radius:var(--radius-lg);opacity:0;transition:opacity .18s;pointer-events:none}
+.tc:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--b2)}
+.tc:hover::after{opacity:1}
+.tc-blue:hover{border-color:var(--blue)}
+.tc-blue::after{background:linear-gradient(135deg,var(--blue-glow),transparent)}
+.tc-green:hover{border-color:var(--green)}
+.tc-green::after{background:linear-gradient(135deg,var(--green-bg),transparent)}
+.tc-purple:hover{border-color:var(--purple)}
+.tc-purple::after{background:linear-gradient(135deg,var(--purple-bg),transparent)}
+.tc-orange:hover{border-color:var(--orange)}
+.tc-orange::after{background:linear-gradient(135deg,var(--orange-bg),transparent)}
+.tc-teal:hover{border-color:var(--teal)}
+.tc-teal::after{background:linear-gradient(135deg,var(--teal-bg),transparent)}
+.tc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tc-badge{font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+.tc-count{font-size:.7rem;color:var(--text3)}
+.tc-count span{color:var(--blue);font-weight:600}
+.tc-icon{font-size:1.6rem;margin-bottom:8px;display:block}
+.tc h3{font-size:.88rem;font-weight:700;margin-bottom:4px;color:var(--text)}
+.tc p{font-size:.76rem;color:var(--text2);line-height:1.5}
+.tc-note{font-size:.68rem;margin-top:8px;padding:4px 9px;border-radius:6px;display:inline-block;font-weight:600}
+.badge-blue{background:rgba(79,142,247,.15);color:var(--blue)}
+.badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.badge-purple{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)}
+.badge-orange{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border)}
+.badge-teal{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-border)}
+.note-neg{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.note-rw{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)}
+.note-pair{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-border)}
+
+/* ── PRACTICE ── */
+.practice-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.bc{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text3)}
+.bc a{color:var(--blue);cursor:pointer;text-decoration:none;font-weight:500}
+.bc a:hover{text-decoration:underline}
+.bc-sep{color:var(--text3)}
+.practice-btns{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Instruction bar */
+.instr{background:var(--s1);border:1px solid var(--b1);border-left:3px solid var(--blue);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin-bottom:18px;font-size:.82rem;color:var(--text2);line-height:1.55}
+.instr strong{color:var(--text)}
+.instr-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.instr-tag{display:inline-flex;align-items:center;gap:5px;font-size:.73rem;color:var(--text2);background:var(--s2);border:1px solid var(--b2);padding:3px 9px;border-radius:20px}
+.neg-warn{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red);font-size:.73rem;padding:3px 10px;border-radius:20px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+
+/* Saved banner */
+.saved-banner{display:flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:7px 13px;margin-bottom:14px;font-size:.77rem;color:var(--green)}
+
+/* History drawer */
+.hist-panel{background:var(--s1);border:1px solid var(--b1);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}
+.hist-panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.hist-panel-title{font-size:.84rem;font-weight:700}
+.hist-item{background:var(--s2);border:1px solid var(--b1);border-radius:var(--radius-sm);padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;transition:all .15s;margin-bottom:6px}
+.hist-item:last-child{margin-bottom:0}
+.hist-item:hover{border-color:var(--blue);background:var(--s3)}
+.hist-title{font-size:.8rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist-meta{font-size:.7rem;color:var(--text3);margin-top:2px}
+.hist-score{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;flex-shrink:0}
+.hs-g{background:var(--green-bg);color:var(--green)}
+.hs-m{background:var(--orange-bg);color:var(--orange)}
+.hs-b{background:var(--red-bg);color:var(--red)}
+.hist-empty{font-size:.8rem;color:var(--text3);padding:8px 0}
+
+/* Question card */
+.qcard{background:var(--s1);border:1px solid var(--b1);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow)}
+.plabel{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--blue);margin-bottom:10px}
+.pbox{background:var(--s2);border:1px solid var(--b1);border-radius:var(--radius);padding:18px 20px;font-size:.9rem;line-height:1.9;color:var(--text2);margin-bottom:20px}
+.qtext{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:14px;line-height:1.5}
+.opts{list-style:none;display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;background:var(--s2);border:1.5px solid var(--b1);border-radius:var(--radius);cursor:pointer;transition:all .15s;font-size:.86rem;color:var(--text2)}
+.opt:hover{border-color:var(--blue);background:var(--blue-glow);color:var(--text)}
+.opt.selected{border-color:var(--blue);background:var(--blue-glow);color:var(--text)}
+.opt input{margin-top:2px;accent-color:var(--blue);flex-shrink:0}
+.sub-row{display:flex;align-items:center;gap:10px;margin-top:20px;flex-wrap:wrap}
+
+/* Word bank */
+.wbank-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:8px}
+.wbank{display:flex;flex-wrap:wrap;gap:7px;padding:14px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--radius);min-height:52px}
+.wchip{background:var(--s3);border:1.5px solid var(--b2);border-radius:var(--radius-sm);padding:5px 13px;cursor:grab;font-size:.83rem;color:var(--text);transition:all .15s;user-select:none}
+.wchip:hover{border-color:var(--blue);background:var(--blue-glow);color:var(--blue)}
+.wchip:active{cursor:grabbing}
+.dslot{display:inline-flex;align-items:center;justify-content:center;background:rgba(79,142,247,.08);border:1.5px dashed rgba(79,142,247,.4);border-radius:6px;padding:2px 12px;min-width:86px;font-size:.83rem;color:var(--text3);cursor:pointer;vertical-align:middle;transition:all .15s}
+.dslot.filled{border-style:solid;border-color:var(--blue);color:var(--blue);background:var(--blue-glow)}
+.dslot.over{background:rgba(79,142,247,.18);border-color:var(--blue)}
+.isel{background:var(--s2);border:1.5px solid var(--blue);border-radius:6px;color:var(--text);padding:3px 8px;font-size:.83rem;font-family:inherit;cursor:pointer;vertical-align:middle;transition:border-color .15s;outline:none}
+.isel:focus{border-color:var(--blue2)}
+
+/* ROP */
+.rop-item{background:var(--s2);border:1.5px solid var(--b1);border-radius:var(--radius);padding:12px 16px;margin-bottom:7px;cursor:grab;font-size:.86rem;display:flex;align-items:flex-start;gap:11px;transition:all .15s;user-select:none;color:var(--text2)}
+.rop-item:hover{border-color:var(--blue);background:var(--blue-glow);color:var(--text)}
+.rop-item:active{cursor:grabbing}
+.rhandle{color:var(--text3);font-size:.9rem;margin-top:1px;flex-shrink:0}
+.rop-num{width:22px;height:22px;border-radius:50%;background:var(--b2);color:var(--text3);font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+/* Alert boxes */
+.alert{border-radius:var(--radius);padding:10px 13px;margin-bottom:14px;font-size:.8rem;line-height:1.5}
+.alert-neg{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red)}
+.alert-pair{background:var(--teal-bg);border:1px solid var(--teal-border);color:var(--teal)}
+
+/* Feedback */
+.fb{margin-top:20px;border-radius:var(--radius-lg);overflow:hidden}
+.fb-head{padding:18px 22px;display:flex;align-items:center;gap:14px}
+.fb.correct .fb-head{background:var(--green-bg);border:1px solid var(--green-border)}
+.fb.partial .fb-head{background:var(--orange-bg);border:1px solid var(--orange-border)}
+.fb.incorrect .fb-head{background:var(--red-bg);border:1px solid var(--red-border)}
+.fb-score-wrap{display:flex;flex-direction:column;align-items:center;min-width:56px}
+.fb-score{font-size:1.6rem;font-weight:800;line-height:1}
+.fb.correct .fb-score{color:var(--green)}
+.fb.partial .fb-score{color:var(--orange)}
+.fb.incorrect .fb-score{color:var(--red)}
+.fb-pct{font-size:.68rem;font-weight:700;color:var(--text3);margin-top:2px}
+.fb-msg{font-weight:700;font-size:.95rem}
+.fb-sub{font-size:.78rem;color:var(--text2);margin-top:3px}
+.fb-body{background:var(--s1);border:1px solid var(--b1);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:18px 22px}
+.fb-row{padding:8px 0;border-bottom:1px solid var(--b1);font-size:.84rem}
+.fb-row:last-child{border-bottom:none;padding-bottom:0}
+.fb-row strong{color:var(--text)}
+.fb-row small{color:var(--text3);display:block;margin-top:3px;font-size:.76rem;line-height:1.5}
+.fb-extra{background:var(--s2);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:10px 22px;font-size:.8rem;color:var(--text2)}
+.fb-extra strong{color:var(--text)}
+
+/* Loading */
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px;gap:14px;color:var(--text2);font-size:.88rem}
+.spin{width:32px;height:32px;border:2.5px solid var(--b2);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Modal */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:20px}
+.modal{background:var(--s1);border:1px solid var(--b2);border-radius:var(--radius-xl);padding:28px;width:100%;max-width:420px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.modal h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.modal p{font-size:.82rem;color:var(--text2);margin-bottom:18px;line-height:1.55}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="hdr">
+  <div class="hdr-brand">
+    <div class="hdr-logo">PTE<em>Practice</em></div>
+    <span class="hdr-pill">Reading</span>
+  </div>
+  <div class="hdr-r" id="hdr-r">
+    <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<!-- ═══ SETUP ═══ -->
+<div id="setup-screen">
+  <div class="setup-wrap">
+    <div class="setup-logo-row">
+      <div class="setup-biglogo">PTE<em>Practice</em></div>
+      <div class="setup-sub">AI-powered reading practice for PTE Academic</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Get Started</div>
+      <div class="card-sub">Enter your Gemini API key to generate personalised practice questions across all 5 PTE reading task types.</div>
+      <div id="saved-pill" style="display:none" class="saved-tag">
+        <span>🔑 API key saved</span>
+        <button class="clear-link" onclick="openModal()">Change / Remove</button>
+      </div>
+      <div id="api-err" class="err-box" style="display:none"></div>
+      <div class="field-lbl">Gemini API Key</div>
+      <div class="inp-wrap">
+        <input class="inp" type="password" id="api-input" placeholder="AIzaSy…" />
+        <button class="vis-btn" onclick="toggleVis()">👁</button>
+      </div>
+      <button class="btn btn-primary" onclick="startApp()">
+        Continue <span style="margin-left:2px">→</span>
+      </button>
+      <div class="setup-divider"><hr><span>Covers all 5 PTE Reading task types</span><hr></div>
+      <div class="task-chips">
+        <span class="chip">R&amp;W Fill in Blanks</span>
+        <span class="chip">MCQ Multiple ⚠</span>
+        <span class="chip">Reorder Paragraphs</span>
+        <span class="chip">Reading Fill in Blanks</span>
+        <span class="chip">MCQ Single Answer</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TASK SCREEN ═══ -->
+<div id="task-screen" style="display:none">
+  <div class="pg">
+    <div id="sbar"></div>
+    <div class="pg-head">
+      <h2>Reading Practice</h2>
+      <p>Configure your session below, then choose a task type to begin</p>
+    </div>
+
+    <!-- Config row -->
+    <div class="config-row">
+
+      <!-- Band card -->
+      <div class="config-card">
+        <div class="config-card-title">
+          <span class="icon" style="background:rgba(79,142,247,.12)">🏆</span>
+          Target Score
+        </div>
+        <div class="seg-ctrl">
+          <button id="sys-pte"   class="seg-btn active" onclick="setScoreSystem('pte')">PTE Academic</button>
+          <button id="sys-ielts" class="seg-btn"        onclick="setScoreSystem('ielts')">IELTS Equivalent</button>
+        </div>
+        <div class="field-lbl" id="band-col-label" style="margin-bottom:6px">PTE Score Range</div>
+        <select id="band-select" class="select" onchange="selectBand(parseInt(this.value))"></select>
+        <div id="band-desc-box" style="display:none" class="band-desc-box"></div>
+        <div id="exact-score-wrap" style="display:none;margin-top:12px">
+          <div class="field-lbl" id="exact-score-lbl" style="margin-bottom:6px">Exact Target Score</div>
+          <select id="exact-score" class="select" onchange="saveExactScore()"></select>
+          <div style="font-size:.7rem;color:var(--text3);margin-top:5px">Questions calibrated to this precise score.</div>
+        </div>
+      </div>
+
+      <!-- Topic card -->
+      <div class="config-card">
+        <div class="config-card-title">
+          <span class="icon" style="background:rgba(52,211,153,.12)">🎯</span>
+          Topic / Context
+          <span style="font-size:.65rem;color:var(--text3);background:var(--s2);border:1px solid var(--b2);padding:2px 7px;border-radius:10px;margin-left:auto">Optional</span>
+        </div>
+        <div class="field-lbl" style="margin-bottom:6px">Topic or paragraph</div>
+        <textarea id="topic-input" class="textarea" placeholder="Enter a topic (e.g. &quot;climate change&quot;) or paste a short paragraph — leave blank for a random topic each time." oninput="saveTopicToStorage()"></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <span style="font-size:.7rem;color:var(--text3)">Short topic or up to 2–3 sentences</span>
+          <button class="btn btn-ghost btn-xs" onclick="clearTopic()">✕ Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task grid -->
+    <div class="pg-head" style="margin-bottom:16px">
+      <h2 style="font-size:1rem">Choose a Task Type</h2>
+    </div>
+    <div class="task-grid">
+      <div class="tc tc-green" onclick="startTask('rwfib')">
+        <div class="tc-top">
+          <span class="tc-badge badge-green">R&amp;W Fill in Blanks</span>
+          <span class="tc-count">Saved: <span id="cnt-rwfib">0</span></span>
+        </div>
+        <span class="tc-icon">📝</span>
+        <h3>Reading &amp; Writing: Fill in the Blanks</h3>
+        <p>Choose the best word for each gap from a dropdown. Up to 300 words.</p>
+        <span class="tc-note note-rw">↑ Counts toward R&amp;W scores</span>
+      </div>
+      <div class="tc tc-purple" onclick="startTask('mcma')">
+        <div class="tc-top">
+          <span class="tc-badge badge-purple">MCQ Multiple</span>
+          <span class="tc-count">Saved: <span id="cnt-mcma">0</span></span>
+        </div>
+        <span class="tc-icon">☑️</span>
+        <h3>Multiple Choice, Multiple Answers</h3>
+        <p>Select ALL correct answers. Incorrect choices deduct points.</p>
+        <span class="tc-note note-neg">⚠ Negative marking</span>
+      </div>
+      <div class="tc tc-teal" onclick="startTask('rop')">
+        <div class="tc-top">
+          <span class="tc-badge badge-teal">Reorder</span>
+          <span class="tc-count">Saved: <span id="cnt-rop">0</span></span>
+        </div>
+        <span class="tc-icon">🔀</span>
+        <h3>Re-order Paragraphs</h3>
+        <p>Drag text boxes into the correct logical order.</p>
+        <span class="tc-note note-pair">Scored on correct adjacent pairs</span>
+      </div>
+      <div class="tc tc-blue" onclick="startTask('rfib')">
+        <div class="tc-top">
+          <span class="tc-badge badge-blue">Fill in Blanks</span>
+          <span class="tc-count">Saved: <span id="cnt-rfib">0</span></span>
+        </div>
+        <span class="tc-icon">🧩</span>
+        <h3>Reading: Fill in the Blanks</h3>
+        <p>Drag words from a pool into the gaps. More words than blanks.</p>
+      </div>
+      <div class="tc tc-orange" onclick="startTask('mcsa')">
+        <div class="tc-top">
+          <span class="tc-badge badge-orange">MCQ Single</span>
+          <span class="tc-count">Saved: <span id="cnt-mcsa">0</span></span>
+        </div>
+        <span class="tc-icon">🎯</span>
+        <h3>Multiple Choice, Single Answer</h3>
+        <p>Read a passage and choose the one best answer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRACTICE ═══ -->
+<div id="practice-screen" style="display:none">
+  <div class="pg">
+    <div class="practice-topbar">
+      <div class="bc">
+        <a onclick="goHome()">Home</a>
+        <span class="bc-sep">/</span>
+        <a onclick="goTasks()">Tasks</a>
+        <span class="bc-sep">/</span>
+        <span id="bc-task" style="color:var(--text2)">Practice</span>
+      </div>
+      <div class="practice-btns">
+        <button class="btn btn-ghost btn-sm" onclick="goTasks()">← Back</button>
+        <button class="btn btn-regen btn-sm" id="regen-btn" onclick="regenerateQuestion()">✨ Regenerate</button>
+        <button class="btn btn-ghost btn-sm" id="load-saved-btn" onclick="toggleHistDrawer()">📂 Saved (<span id="saved-count">0</span>)</button>
+      </div>
+    </div>
+    <div id="hist-drawer" style="display:none"></div>
+    <div id="pcontent"></div>
+  </div>
+</div>
+
+<!-- ═══ KEY MODAL ═══ -->
+<div id="key-modal" class="overlay" style="display:none">
+  <div class="modal">
+    <h3>🔑 Manage API Key</h3>
+    <p>Your key is stored in your browser's local storage. Paste a new key to update it, or remove it to sign out.</p>
+    <div class="field-lbl" style="margin-bottom:6px">New Key (leave blank to keep current)</div>
+    <input type="password" class="inp" id="new-key" placeholder="AIzaSy…" style="margin-bottom:18px" />
+    <div class="modal-actions">
+      <button class="btn btn-danger btn-sm" onclick="clearKey()">🗑 Remove</button>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary btn-sm" onclick="updateKey()" style="width:auto">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── State ─────────────────────────────────────────────────
+let API_KEY='', currentTask='', currentTopic='';
+let session={total:0,correct:0};
+let currentQuestion=null, _currentSavedId=null;
+let histDrawerOpen=false;
+
+const TASKS={
+  rwfib:{name:'R&W Fill in Blanks',   badge:'badge-green'},
+  mcma: {name:'MCQ – Multiple Answers',badge:'badge-purple'},
+  rop:  {name:'Reorder Paragraphs',   badge:'badge-teal'},
+  rfib: {name:'Reading Fill in Blanks',badge:'badge-blue'},
+  mcsa: {name:'MCQ – Single Answer',  badge:'badge-orange'},
+};
+
+// ─── IndexedDB ─────────────────────────────────────────────
+const DB_NAME='PTEPractice',DB_VER=1,STORE='questions';
+let db=null;
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,DB_VER);r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains(STORE)){const s=d.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});s.createIndex('task','task',{unique:false});s.createIndex('savedAt','savedAt',{unique:false});}};r.onsuccess=e=>{db=e.target.result;res(db)};r.onerror=()=>rej(r.error)});}
+function dbSave(rec){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');const r=tx.objectStore(STORE).add(rec);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});}
+function dbGetByTask(task){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readonly');const r=tx.objectStore(STORE).index('task').getAll(task);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});}
+function dbGetById(id){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readonly');const r=tx.objectStore(STORE).get(id);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});}
+function dbDeleteByTask(task){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite');const r=tx.objectStore(STORE).index('task').openCursor(task);r.onsuccess=e=>{const c=e.target.result;if(c){c.delete();c.continue();}else res();};r.onerror=()=>rej(r.error)});}
+function dbCountByTask(task){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readonly');const r=tx.objectStore(STORE).index('task').count(task);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});}
+
+// ─── Theme ─────────────────────────────────────────────────
+function toggleTheme(){
+  const light=document.documentElement.classList.toggle('light');
+  document.getElementById('theme-btn').textContent=light?'🌙':'☀️';
+  localStorage.setItem('pte_theme',light?'light':'dark');
+}
+
+// ─── Band / Score System ───────────────────────────────────
+let currentBand=0,exactScore=null,scoreSystem='pte';
+const BANDS=[
+  {idx:0,pte:'Any Level',  ielts:'Any Level',  pteMin:null,pteMax:null,ielts_band:null,  desc:'Mixed difficulty — a random range is used each time.'},
+  {idx:1,pte:'50 – 57',    ielts:'Band 6.5',   pteMin:50,  pteMax:57,  ielts_band:'6.5',desc:'Simple vocabulary (A2–B1), short sentences, everyday grammar. No idioms or complex clauses.'},
+  {idx:2,pte:'58 – 64',    ielts:'Band 7.0',   pteMin:58,  pteMax:64,  ielts_band:'7.0',desc:'Moderate academic vocabulary (B1–B2), mixed sentence lengths, some subordinate clauses.'},
+  {idx:3,pte:'65 – 73',    ielts:'Band 7.5',   pteMin:65,  pteMax:73,  ielts_band:'7.5',desc:'Academic vocabulary (B2–C1), complex structures, formal tone, some abstract ideas.'},
+  {idx:4,pte:'74 – 82',    ielts:'Band 8.0',   pteMin:74,  pteMax:82,  ielts_band:'8.0',desc:'Sophisticated C1 vocabulary, dense information, discipline-specific terminology.'},
+  {idx:5,pte:'83 – 89',    ielts:'Band 8.5',   pteMin:83,  pteMax:89,  ielts_band:'8.5',desc:'Near-native C1–C2, highly formal register, intricate argumentation, rare technical words.'},
+  {idx:6,pte:'90',         ielts:'Band 9.0',   pteMin:90,  pteMax:90,  ielts_band:'9.0',desc:'Perfect score — C2 mastery, maximum lexical and syntactic complexity.'},
+];
+function setScoreSystem(sys){
+  scoreSystem=sys;localStorage.setItem('pte_score_system',sys);
+  const isPTE=sys==='pte';
+  ['sys-pte','sys-ielts'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',id==='sys-pte'?isPTE:!isPTE);});
+  const lbl=document.getElementById('band-col-label');if(lbl)lbl.textContent=isPTE?'PTE Score Range':'IELTS Band Equivalent';
+  renderBandDropdown();
+}
+function renderBandDropdown(){
+  const sel=document.getElementById('band-select');if(!sel)return;
+  const isPTE=scoreSystem==='pte';
+  sel.innerHTML=BANDS.map(b=>{
+    const label=isPTE?(b.ielts_band?`${b.pte}  —  IELTS ${b.ielts_band}`:b.pte):(b.ielts_band?`${b.ielts}  —  PTE ${b.pteMin}${b.pteMax!==b.pteMin?'–'+b.pteMax:''}`:b.ielts);
+    return`<option value="${b.idx}"${b.idx===currentBand?' selected':''}>${label}</option>`;
+  }).join('');
+  updateBandUI();
+}
+function selectBand(idx){
+  currentBand=idx;exactScore=null;
+  const sel=document.getElementById('band-select');if(sel)sel.value=idx;
+  updateBandUI();
+  localStorage.setItem('pte_band',idx);localStorage.removeItem('pte_exact_score');
+}
+function updateBandUI(){
+  const band=BANDS[currentBand];
+  const descBox=document.getElementById('band-desc-box');
+  if(descBox){
+    if(!currentBand){descBox.style.display='none';}
+    else{
+      descBox.style.display='block';
+      const rangeStr=scoreSystem==='pte'?`IELTS ${band.ielts_band}`:`PTE ${band.pteMin}${band.pteMax!==band.pteMin?'–'+band.pteMax:''}`;
+      descBox.innerHTML=`<strong>${scoreSystem==='pte'?band.pte:band.ielts}</strong>${band.ielts_band?' &nbsp;=&nbsp; '+rangeStr:''}<br><span style="margin-top:4px;display:block">${band.desc}</span>`;
+    }
+  }
+  const wrap=document.getElementById('exact-score-wrap');if(!wrap)return;
+  if(!currentBand||band.pteMin===null){wrap.style.display='none';}
+  else{
+    wrap.style.display='block';
+    const lbl=document.getElementById('exact-score-lbl');if(lbl)lbl.textContent='Exact Target Score (PTE)';
+    populateScoreDropdown(band.pteMin,band.pteMax);
+  }
+}
+function populateScoreDropdown(min,max){
+  const sel=document.getElementById('exact-score');if(!sel)return;
+  const saved=parseInt(localStorage.getItem('pte_exact_score')||'0');
+  sel.innerHTML=`<option value="">— Any score in this range —</option>`+
+    Array.from({length:max-min+1},(_,i)=>{const v=min+i;return`<option value="${v}"${v===saved?' selected':''}>PTE ${v}</option>`;}).join('');
+  exactScore=(saved>=min&&saved<=max)?saved:null;
+}
+function saveExactScore(){const v=parseInt(document.getElementById('exact-score').value);exactScore=isNaN(v)?null:v;if(exactScore)localStorage.setItem('pte_exact_score',exactScore);else localStorage.removeItem('pte_exact_score');}
+function getBandInstruction(){
+  if(!currentBand)return'Calibrate difficulty to a general academic level suitable for all PTE candidates.';
+  const b=BANDS[currentBand];const ieltsNote=b.ielts_band?` (IELTS Band ${b.ielts_band} equivalent)`:'';
+  const score=exactScore?`exactly ${exactScore}`:`${b.pteMin}–${b.pteMax}`;
+  return`Calibrate this question for PTE Academic score ${score}${ieltsNote}. ${b.desc}`;
+}
+function getBandDisplayLabel(){
+  if(!currentBand)return null;
+  const b=BANDS[currentBand];
+  return(exactScore?`PTE ${exactScore}`:`PTE ${b.pteMin}${b.pteMax!==b.pteMin?'–'+b.pteMax:''}`)+(b.ielts_band?` = IELTS ${b.ielts_band}`:'');
+}
+
+// ─── Topic ─────────────────────────────────────────────────
+function getTopicInput(){return(document.getElementById('topic-input')?.value||'').trim();}
+function saveTopicToStorage(){const t=getTopicInput();if(t)localStorage.setItem('pte_topic',t);else localStorage.removeItem('pte_topic');}
+function clearTopic(){document.getElementById('topic-input').value='';localStorage.removeItem('pte_topic');}
+function resolveTopicContext(){
+  const t=currentTopic;
+  if(!t)return`Use the following randomly selected topic: "${['technology','environment','health','education','culture','science','economics','history','psychology','urbanisation','climate change','artificial intelligence','nutrition','space exploration','biodiversity','digital media','renewable energy','migration','genetics','philosophy'][Math.floor(Math.random()*20)]}"`;
+  return t.length>60||t.split(' ').length>8
+    ?`Base your question on the themes and vocabulary in this context (do NOT copy verbatim): "${t}"`
+    :`The user specified topic: "${t}". Generate a question strictly about this topic.`;
+}
+
+// ─── Init ──────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',async()=>{
+  if(localStorage.getItem('pte_theme')==='light'){document.documentElement.classList.add('light');document.getElementById('theme-btn').textContent='🌙';}
+  scoreSystem=localStorage.getItem('pte_score_system')||'pte';
+  setScoreSystem(scoreSystem);
+  selectBand(parseInt(localStorage.getItem('pte_band')||'0'));
+  const savedTopic=localStorage.getItem('pte_topic')||'';
+  if(savedTopic)document.getElementById('topic-input').value=savedTopic;
+  await openDB();
+  const savedKey=localStorage.getItem('pte_gemini_key');
+  if(savedKey){API_KEY=savedKey;document.getElementById('api-input').value=savedKey;document.getElementById('saved-pill').style.display='flex';goTasks();}
+});
+
+// ─── Screens ───────────────────────────────────────────────
+function show(id){['setup-screen','task-screen','practice-screen'].forEach(s=>{document.getElementById(s).style.display=s===id?(s==='setup-screen'?'flex':'block'):'none';});}
+function goHome(){show('setup-screen');}
+async function goTasks(){await refreshCounts();renderScoreBar();show('task-screen');renderHdrKey();histDrawerOpen=false;}
+
+// ─── Header ────────────────────────────────────────────────
+function renderHdrKey(){
+  const light=document.documentElement.classList.contains('light');
+  document.getElementById('hdr-r').innerHTML=
+    (API_KEY?`<div class="hdr-key" onclick="openModal()"><div class="kdot"></div><span>API Key Active</span><span style="color:var(--text3)">✎</span></div>`:'')+
+    `<button class="icon-btn" id="theme-btn" onclick="toggleTheme()">${light?'🌙':'☀️'}</button>`;
+}
+
+// ─── Score bar ─────────────────────────────────────────────
+function renderScoreBar(){
+  const el=document.getElementById('sbar');
+  if(!session.total){el.innerHTML='';return;}
+  const pct=Math.round(session.correct/session.total*100);
+  const pc=pct>=75?'v-green':pct>=50?'v-orange':'v-red';
+  el.innerHTML=`<div class="score-bar">
+    <div class="sc"><div class="v v-blue">${session.total}</div><div class="l">Attempted</div></div>
+    <div class="sc"><div class="v v-green">${session.correct}</div><div class="l">Correct</div></div>
+    <div class="sc"><div class="v ${pc}">${pct}%</div><div class="l">Accuracy</div></div>
+  </div>`;
+}
+
+async function refreshCounts(){
+  for(const t of Object.keys(TASKS)){const n=await dbCountByTask(t);const el=document.getElementById('cnt-'+t);if(el)el.textContent=n;}
+}
+async function refreshSavedCount(){const n=await dbCountByTask(currentTask);document.getElementById('saved-count').textContent=n;}
+
+// ─── Key management ────────────────────────────────────────
+function startApp(){const k=document.getElementById('api-input').value.trim();if(!k){setErr('Please enter your Gemini API key.');return;}API_KEY=k;localStorage.setItem('pte_gemini_key',k);clearErr();openDB().then(()=>goTasks());}
+function openModal(){document.getElementById('new-key').value='';document.getElementById('key-modal').style.display='flex';}
+function closeModal(){document.getElementById('key-modal').style.display='none';}
+function updateKey(){const k=document.getElementById('new-key').value.trim();if(k){API_KEY=k;localStorage.setItem('pte_gemini_key',k);document.getElementById('api-input').value=k;}closeModal();}
+function clearKey(){localStorage.removeItem('pte_gemini_key');API_KEY='';document.getElementById('api-input').value='';document.getElementById('saved-pill').style.display='none';closeModal();show('setup-screen');}
+function toggleVis(){const i=document.getElementById('api-input');i.type=i.type==='password'?'text':'password';}
+function setErr(m){const e=document.getElementById('api-err');e.textContent=m;e.style.display='block';}
+function clearErr(){document.getElementById('api-err').style.display='none';}
+
+// ─── Start task ────────────────────────────────────────────
+async function startTask(task){
+  currentTask=task;currentTopic=getTopicInput();histDrawerOpen=false;
+  document.getElementById('bc-task').textContent=TASKS[task].name;
+  document.getElementById('hist-drawer').style.display='none';
+  show('practice-screen');await refreshSavedCount();
+  const saved=await dbGetByTask(task);
+  if(saved.length>0){const latest=saved[saved.length-1];currentQuestion=latest.data;renderQuestion(task,latest.data,true,latest.id);}
+  else await generateQuestion(false);
+}
+
+// ─── History drawer ────────────────────────────────────────
+async function toggleHistDrawer(){
+  histDrawerOpen=!histDrawerOpen;
+  const drawer=document.getElementById('hist-drawer');
+  drawer.style.display=histDrawerOpen?'block':'none';
+  if(histDrawerOpen)await renderHistItems();
+}
+async function renderHistItems(){
+  const items=await dbGetByTask(currentTask);
+  const drawer=document.getElementById('hist-drawer');
+  if(!items.length){drawer.innerHTML=`<div class="hist-panel"><div class="hist-empty">No saved questions yet for this task.</div></div>`;return;}
+  drawer.innerHTML=`<div class="hist-panel">
+    <div class="hist-panel-head">
+      <span class="hist-panel-title">📚 Saved Questions</span>
+      <button class="btn btn-danger btn-xs" onclick="clearTaskHistory()">🗑 Clear All</button>
+    </div>
+    ${[...items].reverse().map(q=>{
+      const d=new Date(q.savedAt);
+      const ts=d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      const snip=(q.data.passage||q.data.sentences?.[0]||'Question').replace(/\[B\d\]/g,'___').substring(0,65)+'…';
+      const sc=q.score!=null?(q.score>=75?'hs-g':q.score>=50?'hs-m':'hs-b'):'';
+      const sl=q.score!=null?`<span class="hist-score ${sc}">${q.score}%</span>`:'';
+      return`<div class="hist-item" onclick="loadSavedQ(${q.id})"><div style="flex:1;min-width:0"><div class="hist-title">${snip}</div><div class="hist-meta">${ts}</div></div>${sl}</div>`;
+    }).join('')}
+  </div>`;
+}
+async function loadSavedQ(id){const q=await dbGetById(id);if(!q)return;currentQuestion=q.data;histDrawerOpen=false;document.getElementById('hist-drawer').style.display='none';renderQuestion(currentTask,q.data,true,q.id);}
+async function clearTaskHistory(){if(!confirm(`Delete all saved questions for "${TASKS[currentTask].name}"?`))return;await dbDeleteByTask(currentTask);await refreshSavedCount();await refreshCounts();await renderHistItems();}
+
+// ─── Generate ──────────────────────────────────────────────
+async function generateQuestion(isRegen=false){
+  currentTopic=getTopicInput();
+  document.getElementById('pcontent').innerHTML=`<div class="loading"><div class="spin"></div><span>${isRegen?'Regenerating question…':'Generating question…'}</span></div>`;
+  document.getElementById('hist-drawer').style.display='none';histDrawerOpen=false;
+  document.getElementById('regen-btn').disabled=true;document.getElementById('load-saved-btn').disabled=true;
+  try{
+    const json=parseJSON(await callGemini(buildPrompt(currentTask)));
+    currentQuestion=json;
+    const sid=await dbSave({task:currentTask,data:json,savedAt:Date.now(),score:null});
+    await refreshSavedCount();await refreshCounts();
+    renderQuestion(currentTask,json,false,sid);
+  }catch(e){
+    document.getElementById('pcontent').innerHTML=`<div class="err-box">❌ ${e.message}<br><button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="generateQuestion(false)">Retry</button></div>`;
+  }
+  document.getElementById('regen-btn').disabled=false;document.getElementById('load-saved-btn').disabled=false;
+}
+async function regenerateQuestion(){await generateQuestion(true);}
+
+async function updateScore(id,pct){if(!db||!id)return;const tx=db.transaction(STORE,'readwrite');const s=tx.objectStore(STORE);const r=s.get(id);r.onsuccess=()=>{const rec=r.result;if(rec){rec.score=pct;s.put(rec);}};}
+
+// ─── Gemini ────────────────────────────────────────────────
+async function callGemini(prompt){
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
+  if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'API error');}
+  const d=await r.json();return d.candidates?.[0]?.content?.parts?.[0]?.text||'';
+}
+function parseJSON(raw){const m=raw.match(/```json\s*([\s\S]*?)```/)||raw.match(/```\s*([\s\S]*?)```/);return JSON.parse((m?m[1]:raw).trim());}
+
+// ─── Prompts ───────────────────────────────────────────────
+function buildPrompt(task){
+  const topicCtx=resolveTopicContext();const bandCtx=getBandInstruction();
+  if(task==='rwfib')return`Generate a PTE Academic "Reading & Writing: Fill in the Blanks" question. ${topicCtx} ${bandCtx} Passage 200-300 words with EXACTLY 6 blanks [B1]-[B6]. Return ONLY valid JSON:\n\`\`\`json\n{"passage":"text","options":{"B1":["a","b","c","d"],"B2":["a","b","c","d"],"B3":["a","b","c","d"],"B4":["a","b","c","d"],"B5":["a","b","c","d"],"B6":["a","b","c","d"]},"answers":{"B1":"c","B2":"c","B3":"c","B4":"c","B5":"c","B6":"c"},"explanations":{"B1":"why","B2":"why","B3":"why","B4":"why","B5":"why","B6":"why"}}\n\`\`\``;
+  if(task==='mcma')return`Generate PTE Academic "MCQ Multiple Answers". ${topicCtx} ${bandCtx} 250-350 word passage. Return ONLY valid JSON:\n\`\`\`json\n{"passage":"text","question":"Which statements are correct?","options":["A","B","C","D","E","F"],"answers":[0,2,4],"explanations":["why","why","why","why","why","why"]}\n\`\`\`\n2-3 correct out of 6.`;
+  if(task==='rop')return`Generate PTE Academic "Reorder Paragraphs". ${topicCtx} ${bandCtx} Return ONLY valid JSON:\n\`\`\`json\n{"sentences":["S0","S1","S2","S3","S4"],"correctOrder":[2,0,4,1,3],"pairExplanation":"pair clues","explanation":"overall flow"}\n\`\`\`\n5 sentences, out of order.`;
+  if(task==='rfib')return`Generate PTE Academic "Reading Fill in Blanks (Drag & Drop)". ${topicCtx} ${bandCtx} 120-180 word passage, 5 blanks [B1]-[B5]. Return ONLY valid JSON:\n\`\`\`json\n{"passage":"text","wordPool":["w1","w2","w3","w4","w5","w6","w7","w8"],"answers":{"B1":"w","B2":"w","B3":"w","B4":"w","B5":"w"},"explanations":{"B1":"why","B2":"why","B3":"why","B4":"why","B5":"why"}}\n\`\`\`\n8 words: 5 correct + 3 distractors.`;
+  if(task==='mcsa')return`Generate PTE Academic "MCQ Single Answer". ${topicCtx} ${bandCtx} 180-280 words. Return ONLY valid JSON:\n\`\`\`json\n{"passage":"text","questionType":"content OR tone","question":"question","options":["A","B","C","D"],"answer":1,"explanation":"why correct and why others wrong"}\n\`\`\``;
+}
+
+// ─── Render ────────────────────────────────────────────────
+const INSTRS={
+  rwfib:'For each blank, choose the most appropriate word from the dropdown. This task affects both your <strong>Reading and Writing</strong> scores.',
+  mcma: 'Select <strong>all</strong> correct answers. Incorrect selections deduct marks — minimum score is 0.',
+  rop:  'Drag text boxes into the correct logical order. You earn <strong>1 point per correctly adjacent pair</strong>.',
+  rfib: 'Drag words from the pool into the correct gaps. <strong>Not all words will be used.</strong>',
+  mcsa: 'Choose the <strong>single best answer</strong> based on the passage content or tone.',
+};
+
+function renderQuestion(task,data,fromSaved=false,savedId=null){
+  _currentSavedId=savedId;
+  const el=document.getElementById('pcontent');
+  const bandLabel=getBandDisplayLabel();
+  const topicSnip=currentTopic?(currentTopic.length>60?currentTopic.substring(0,60)+'…':currentTopic):null;
+  let html=`<div class="instr">
+    <span class="tc-badge ${TASKS[task].badge}" style="margin-right:8px">${TASKS[task].name}</span> ${INSTRS[task]}
+    ${task==='mcma'?'<span class="neg-warn" style="margin-left:6px">⚠ Negative marking</span>':''}
+    <div class="instr-meta">
+      ${bandLabel?`<span class="instr-tag">🏆 ${bandLabel}</span>`:''}
+      ${topicSnip?`<span class="instr-tag">🎯 ${topicSnip}</span>`:''}
+      ${fromSaved?`<span class="instr-tag" style="color:var(--green);border-color:var(--green-border)">💾 Loaded from saved</span>`:''}
+    </div>
+  </div><div class="qcard">`;
+  if(task==='rwfib')html+=buildRWFIB(data);
+  else if(task==='mcma')html+=buildMCMA(data);
+  else if(task==='rop')html+=buildROP(data);
+  else if(task==='rfib')html+=buildRFIB(data);
+  else if(task==='mcsa')html+=buildMCSA(data);
+  html+=`</div>`;
+  el.innerHTML=html;
+  el.dataset.task=task;el.dataset.qdata=JSON.stringify(data);
+}
+
+// ═══ R&W FILL IN BLANKS ══════════════════════════════════
+function buildRWFIB(data){
+  let p=data.passage;
+  for(const[b,opts]of Object.entries(data.options)){
+    const os=opts.map(o=>`<option value="${o}">${o}</option>`).join('');
+    p=p.replace(`[${b}]`,`<select id="sel-${b}" class="isel"><option value="">—</option>${os}</select>`);
+  }
+  return`<div class="plabel">Passage — select the best word for each blank</div>
+  <div class="pbox" style="line-height:2.5">${p}</div>
+  <div class="sub-row"><button class="btn btn-success" onclick="evalRWFIB()">✅ Check Answers</button></div>
+  <div id="fb"></div>`;
+}
+async function evalRWFIB(){
+  const data=JSON.parse(document.getElementById('pcontent').dataset.qdata);
+  let c=0,tot=Object.keys(data.answers).length,rows='';
+  for(const[b,ans]of Object.entries(data.answers)){const g=document.getElementById('sel-'+b)?.value||'';const ok=g===ans;if(ok)c++;rows+=`<div class="fb-row"><strong>${b}:</strong> Your choice: <em>"${g||'—'}"</em> ${ok?'✅':'❌'} Correct: <strong>${ans}</strong><small>${data.explanations[b]}</small></div>`;}
+  showFB(c,tot,rows,'');session.total+=tot;session.correct+=c;await updateScore(_currentSavedId,Math.round(c/tot*100));
+}
+
+// ═══ MCQ MULTIPLE ════════════════════════════════════════
+function buildMCMA(data){
+  const opts=data.options.map((o,i)=>`<li class="opt" onclick="togCB(this,${i})"><input type="checkbox" id="cb${i}"><label for="cb${i}" style="cursor:pointer;flex:1">${String.fromCharCode(65+i)}. ${o}</label></li>`).join('');
+  return`<div class="plabel">Passage</div>
+  <div class="pbox">${data.passage}</div>
+  <div class="qtext">❓ ${data.question}</div>
+  <div class="alert alert-neg">⚠ <strong>Negative Marking:</strong> Each correct = +1, each incorrect = −1, minimum score = 0. Only select answers you are confident about.</div>
+  <ul class="opts">${opts}</ul>
+  <div class="sub-row"><button class="btn btn-success" onclick="evalMCMA()">✅ Submit</button></div>
+  <div id="fb"></div>`;
+}
+function togCB(li,i){const cb=document.getElementById('cb'+i);cb.checked=!cb.checked;li.classList.toggle('selected',cb.checked);}
+async function evalMCMA(){
+  const data=JSON.parse(document.getElementById('pcontent').dataset.qdata);
+  const sel=[...document.querySelectorAll('input[type=checkbox]:checked')].map(c=>+c.id.replace('cb',''));
+  const corrSel=sel.filter(s=>data.answers.includes(s)).length;const wrongSel=sel.filter(s=>!data.answers.includes(s)).length;
+  const final=Math.max(0,corrSel-wrongSel);const max=data.answers.length;
+  const rows=data.options.map((o,i)=>{const isC=data.answers.includes(i),wasS=sel.includes(i);const mark=wasS?(isC?'✅ Correct (+1)':'❌ Wrong (−1)'):(isC?'⚪ Missed':'⚪ Not selected');return`<div class="fb-row"><strong>${String.fromCharCode(65+i)}.</strong> ${mark} — ${o}<small>${data.explanations[i]}</small></div>`;}).join('');
+  const extra=`<div class="fb-extra">Correct: ${corrSel} | Wrong: ${wrongSel} | Raw: ${corrSel-wrongSel} | <strong>Final: ${final}/${max}</strong></div>`;
+  showFB(final,max,rows,extra);session.total+=max;session.correct+=final;await updateScore(_currentSavedId,Math.round(final/max*100));
+}
+
+// ═══ REORDER ═════════════════════════════════════════════
+function buildROP(data){
+  const sh=[...data.sentences.keys()].sort(()=>Math.random()-.5);
+  const items=sh.map((si,pos)=>`<div class="rop-item" draggable="true" data-si="${si}" ondragstart="rdS(event)" ondragover="rdO(event)" ondrop="rdD(event)" ondragleave="rdL(event)" ondragend="rdE(event)"><span class="rop-num">${pos+1}</span><span class="rhandle">⠿</span><span>${data.sentences[si]}</span></div>`).join('');
+  return`<div class="qtext">📝 Arrange these sentences into the correct logical order:</div>
+  <div class="alert alert-pair">💡 <strong>Pair Scoring:</strong> 1 point per correctly adjacent pair (${data.sentences.length-1} pairs total).</div>
+  <div id="rop-list">${items}</div>
+  <div class="sub-row"><button class="btn btn-success" onclick="evalROP()">✅ Check Order</button></div>
+  <div id="fb"></div>`;
+}
+let _rd=null;
+function rdS(e){_rd=e.currentTarget;setTimeout(()=>_rd.style.opacity='.3',0);}
+function rdO(e){e.preventDefault();e.currentTarget.style.borderColor='var(--blue)';}
+function rdL(e){e.currentTarget.style.borderColor='';}
+function rdE(e){e.currentTarget.style.opacity='1';e.currentTarget.style.borderColor='';}
+function rdD(e){e.preventDefault();const t=e.currentTarget;t.style.borderColor='';if(_rd&&_rd!==t){const l=document.getElementById('rop-list'),k=[...l.children];l.insertBefore(_rd,k.indexOf(_rd)<k.indexOf(t)?t.nextSibling:t);}if(_rd){_rd.style.opacity='1';_rd=null;}}
+async function evalROP(){
+  const data=JSON.parse(document.getElementById('pcontent').dataset.qdata);
+  const user=[...document.querySelectorAll('#rop-list .rop-item')].map(e=>+e.dataset.si);
+  const cor=data.correctOrder;let pairs=0;
+  for(let i=0;i<user.length-1;i++)for(let j=0;j<cor.length-1;j++)if(cor[j]===user[i]&&cor[j+1]===user[i+1]){pairs++;break;}
+  const max=cor.length-1;
+  let rows=`<div class="fb-row"><strong>Your order:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">${user.map((si,pos)=>{const ok=cor[pos]===si;return`<div style="display:flex;gap:8px;align-items:flex-start"><span style="flex-shrink:0;min-width:22px;height:22px;border-radius:50%;background:${ok?'var(--green-bg)':'var(--red-bg)'};color:${ok?'var(--green)':'var(--red)'};border:1px solid ${ok?'var(--green-border)':'var(--red-border)'};font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">${pos+1}</span><span style="font-size:.84rem;color:var(--text2);line-height:1.5">${data.sentences[si]}</span></div>`;}).join('')}</div></div>`;
+  rows+=`<div class="fb-row"><strong>Correct order:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">${cor.map((si,pos)=>`<div style="display:flex;gap:8px;align-items:flex-start"><span style="flex-shrink:0;min-width:22px;height:22px;border-radius:50%;background:var(--blue-glow);color:var(--blue);border:1px solid rgba(79,142,247,.3);font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">${pos+1}</span><span style="font-size:.84rem;color:var(--text2);line-height:1.5">${data.sentences[si]}</span></div>`).join('')}</div></div>`;
+  rows+=`<div class="fb-row"><strong>Pair analysis:</strong><small>${data.pairExplanation}</small></div>`;
+  rows+=`<div class="fb-row"><strong>Logical flow:</strong><small>${data.explanation}</small></div>`;
+  const extra=`<div class="fb-extra">Correct adjacent pairs: <strong>${pairs}/${max}</strong></div>`;
+  showFB(pairs,max,rows,extra);session.total+=max;session.correct+=pairs;await updateScore(_currentSavedId,Math.round(pairs/max*100));
+}
+
+// ═══ READING FILL IN BLANKS ══════════════════════════════
+function buildRFIB(data){
+  const p=data.passage.replace(/\[B(\d)\]/g,(_,n)=>`<span class="dslot" id="slot-B${n}" data-blank="B${n}" ondrop="sDrop(event)" ondragover="sOver(event)" ondragleave="sLeave(event)" onclick="sClick(this)">▢ ${n}</span>`);
+  const words=[...data.wordPool].sort(()=>Math.random()-.5);
+  const chips=words.map(w=>`<div class="wchip" draggable="true" id="wc-${w}" data-word="${w}" ondragstart="cDrag(event)" onclick="cClick(this)">${w}</div>`).join('');
+  return`<div class="plabel">Passage — drag words from the pool into the blanks</div>
+  <div class="pbox">${p}</div>
+  <div class="wbank-lbl">Word Pool &nbsp;<span style="font-weight:400;color:var(--text3)">(${data.wordPool.length} words · ${Object.keys(data.answers).length} blanks · not all words used)</span></div>
+  <div class="wbank" id="wpool">${chips}</div>
+  <div class="sub-row"><button class="btn btn-success" onclick="evalRFIB()">✅ Check Answers</button></div>
+  <div id="fb"></div>`;
+}
+let _dw=null,_sc2=null,_ss=null;
+function cDrag(e){_dw=e.currentTarget;e.dataTransfer.setData('text',e.currentTarget.dataset.word);}
+function sOver(e){e.preventDefault();e.currentTarget.classList.add('over');}
+function sLeave(e){e.currentTarget.classList.remove('over');}
+function sDrop(e){e.preventDefault();const sl=e.currentTarget;sl.classList.remove('over');if(!sl.dataset.blank)return;placeW(sl,e.dataTransfer.getData('text'),document.getElementById('wc-'+e.dataTransfer.getData('text')));}
+function cClick(chip){if(_ss){placeW(_ss,chip.dataset.word,chip);_ss=null;return;}document.querySelectorAll('.wchip').forEach(c=>c.style.outline='');if(_sc2===chip){_sc2=null;return;}_sc2=chip;chip.style.outline='2px solid var(--blue)';}
+function sClick(sl){
+  if(sl.classList.contains('filled')){const w=sl.dataset.current;sl.textContent=`▢ ${sl.dataset.blank.replace('B','')}`;sl.classList.remove('filled');delete sl.dataset.current;sl.style.outline='';const c=document.createElement('div');c.className='wchip';c.draggable=true;c.id='wc-'+w;c.dataset.word=w;c.textContent=w;c.ondragstart=cDrag;c.onclick=()=>cClick(c);document.getElementById('wpool').appendChild(c);return;}
+  if(_sc2){placeW(sl,_sc2.dataset.word,_sc2);_sc2=null;document.querySelectorAll('.wchip').forEach(c=>c.style.outline='');return;}
+  document.querySelectorAll('.dslot').forEach(s=>s.style.outline='');_ss=sl;sl.style.outline='2px solid var(--blue)';
+}
+function placeW(sl,word,chipEl){if(sl.classList.contains('filled')){const old=sl.dataset.current;const c=document.createElement('div');c.className='wchip';c.draggable=true;c.id='wc-'+old;c.dataset.word=old;c.textContent=old;c.ondragstart=cDrag;c.onclick=()=>cClick(c);document.getElementById('wpool').appendChild(c);}sl.textContent=word;sl.classList.add('filled');sl.dataset.current=word;sl.style.outline='';if(chipEl)chipEl.remove();}
+async function evalRFIB(){
+  const data=JSON.parse(document.getElementById('pcontent').dataset.qdata);
+  let c=0,tot=Object.keys(data.answers).length,rows='';
+  for(const[b,ans]of Object.entries(data.answers)){const g=document.getElementById('slot-'+b)?.dataset.current||'';const ok=g.toLowerCase()===ans.toLowerCase();if(ok)c++;rows+=`<div class="fb-row"><strong>${b}:</strong> Your word: <em>"${g||'(empty)'}"</em> ${ok?'✅':'❌'} Correct: <strong>${ans}</strong><small>${data.explanations[b]}</small></div>`;}
+  showFB(c,tot,rows,'');session.total+=tot;session.correct+=c;await updateScore(_currentSavedId,Math.round(c/tot*100));
+}
+
+// ═══ MCQ SINGLE ══════════════════════════════════════════
+function buildMCSA(data){
+  const qt=data.questionType?`<span style="font-size:.65rem;font-weight:700;background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border);padding:2px 8px;border-radius:20px;margin-left:8px;text-transform:uppercase;vertical-align:middle">${data.questionType}</span>`:'';
+  const opts=data.options.map((o,i)=>`<li class="opt" onclick="pickR(this,${i})"><input type="radio" name="mcsa" id="r${i}"><label for="r${i}" style="cursor:pointer;flex:1">${String.fromCharCode(65+i)}. ${o}</label></li>`).join('');
+  return`<div class="plabel">Passage ${qt}</div>
+  <div class="pbox">${data.passage}</div>
+  <div class="qtext">❓ ${data.question}</div>
+  <ul class="opts">${opts}</ul>
+  <div class="sub-row"><button class="btn btn-success" onclick="evalMCSA()">✅ Submit</button></div>
+  <div id="fb"></div>`;
+}
+function pickR(li,i){document.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));li.classList.add('selected');document.getElementById('r'+i).checked=true;}
+async function evalMCSA(){
+  const data=JSON.parse(document.getElementById('pcontent').dataset.qdata);
+  const sel=document.querySelector('input[name=mcsa]:checked');if(!sel){alert('Please select an answer.');return;}
+  const i=+sel.id.replace('r','');const ok=i===data.answer;
+  const rows=`<div class="fb-row"><strong>Your answer:</strong> ${String.fromCharCode(65+i)}. ${data.options[i]}</div>
+  <div class="fb-row"><strong>Correct answer:</strong> ${String.fromCharCode(65+data.answer)}. ${data.options[data.answer]}</div>
+  <div class="fb-row"><strong>Explanation:</strong><small>${data.explanation}</small></div>`;
+  showFB(ok?1:0,1,rows,'');session.total++;if(ok)session.correct++;await updateScore(_currentSavedId,ok?100:0);
+}
+
+// ─── Feedback ──────────────────────────────────────────────
+function showFB(correct,total,rows,extra){
+  const pct=Math.round(correct/total*100);
+  const cls=pct>=75?'correct':pct>=50?'partial':'incorrect';
+  const icon=pct>=75?'🎉':pct>=50?'⚠️':'❌';
+  const msg=pct>=75?'Excellent work!':pct>=50?'Partially correct':'Needs improvement';
+  document.getElementById('fb').innerHTML=`<div class="fb ${cls}">
+    <div class="fb-head">
+      <div class="fb-score-wrap"><div class="fb-score">${correct}/${total}</div><div class="fb-pct">${pct}%</div></div>
+      <div><div class="fb-msg">${icon} ${msg}</div><div class="fb-sub">You scored ${correct} out of ${total} on this question</div></div>
+    </div>
+    ${extra}
+    <div class="fb-body">${rows}</div>
+  </div>`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "@vyro/bridge",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Bridge utilities for mixing React and Vue components — reactToVue, vueToReact.",
+  "main": "index.ts",
+  "exports": { ".": "./index.ts" },
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "vue": ">=3"
+  }
+}
