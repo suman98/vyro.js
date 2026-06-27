@@ -1,10 +1,25 @@
-# vyro-js-plugin
+# vyro.js
 
 Zero-config Vite plugin for multi-page apps. Drop HTML, React (`.jsx`/`.tsx`), or Vue (`.vue`) files into `src/pages/` — each becomes its own standalone page. No route table, no manual entry list. The filesystem **is** the routing table.
 
 ---
 
-## Install
+## Quick start
+
+```bash
+npx github:suman98/vyro.js my-app
+cd my-app
+npm install
+npm run dev
+```
+
+Prompts for TypeScript or JavaScript, then scaffolds a ready-to-run project.
+
+> **Once published to npm:** `npm create vyro-js my-app`
+
+---
+
+## Add to an existing project
 
 ```bash
 npm install vyro-js-plugin
@@ -153,18 +168,15 @@ npm install vue                    # Vue pages
 ## Repository layout
 
 ```
-index.js              ← plugin source (this package's main export)
-bridge/
-  index.ts            ← @vyro/bridge: reactToVue / vueToReact utilities
+index.js              ← plugin entry point (assembles all sub-plugins)
+src/
+  plugins/            ← one file per Vite plugin (config, dev-wrappers, minify-html, …)
+  utils/              ← shared helpers (discover.js, html.js)
 create-vyro-app/
-  index.js            ← create-vyro-app scaffolder CLI
+  index.js            ← scaffolder CLI (npm create github:suman98/vyro.js)
   templates/          ← JS + TS starter templates
 test/
-  real/               ← local test app (gitignored, imports from ../../index.js)
-src/
-  pages/              ← demo site pages (uses this plugin)
-public/               ← static assets
-vite.config.js        ← demo site config
+  real/               ← local test app (imports plugin from ../../index.js)
 ```
 
 ---

@@ -5,14 +5,17 @@ import { discoverEntries } from '../utils/discover.js'
 const VIRTUAL_PREFIX = '/@vyro-inline/'
 
 export function extractInlineAssetsPlugin(ctx) {
+  const extractMap = new Map()
+  const contentMap = new Map()
+
   return {
     name: 'vyro:extract-inline-assets',
     apply: 'build',
     enforce: 'pre',
 
     buildStart() {
-      this._extractMap = new Map()
-      this._contentMap = new Map()
+      extractMap.clear()
+      contentMap.clear()
 
       const htmlEntries = (ctx.cachedEntries ?? discoverEntries(ctx.pagesDir))
         .filter((e) => e.ext === '.html')
@@ -37,29 +40,29 @@ export function extractInlineAssetsPlugin(ctx) {
         const hasJs  = jsBlocks.length > 0
         if (!hasCss && !hasJs) continue
 
-        if (hasCss) this._contentMap.set(`${base}.css`, cssBlocks.join('\n\n'))
-        if (hasJs)  this._contentMap.set(`${base}.js`,  jsBlocks.join('\n\n'))
-        this._extractMap.set(htmlPath, { hasCss, hasJs, base })
+        if (hasCss) contentMap.set(`${base}.css`, cssBlocks.join('\n\n'))
+        if (hasJs)  contentMap.set(`${base}.js`,  jsBlocks.join('\n\n'))
+        extractMap.set(htmlPath, { hasCss, hasJs, base })
       }
     },
 
     resolveId(id) {
       if (id.startsWith(VIRTUAL_PREFIX)) {
         const name = id.slice(VIRTUAL_PREFIX.length)
-        if (this._contentMap?.has(name)) return '\0vyro-inline:' + name
+        if (contentMap.has(name)) return '\0vyro-inline:' + name
       }
     },
 
     load(id) {
       if (id.startsWith('\0vyro-inline:')) {
-        return this._contentMap?.get(id.slice('\0vyro-inline:'.length)) ?? null
+        return contentMap.get(id.slice('\0vyro-inline:'.length)) ?? null
       }
     },
 
     transformIndexHtml: {
       order: 'pre',
       handler(html, ctx2) {
-        const entry = this._extractMap?.get(ctx2.filename)
+        const entry = extractMap.get(ctx2.filename)
         if (!entry) return html
         const { hasCss, hasJs, base } = entry
         let result = html
