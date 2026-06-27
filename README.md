@@ -19,12 +19,6 @@ Prompts for TypeScript or JavaScript, then scaffolds a ready-to-run project.
 
 ---
 
-## Add to an existing project
-
-```bash
-npm install vyro-js-plugin
-```
-
 ## Usage
 
 ```js
