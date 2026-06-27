@@ -4,7 +4,10 @@
   "type": "module",
   "description": "Zero-config Vite plugin for multi-page apps — drop HTML/Vue/JSX/TSX files, get routes.",
   "main": "index.js",
-  "exports": { ".": "./index.js" },
+  "exports": {
+    ".": "./index.js",
+    "./bridge": "./bridge/index.js"
+  },
   "bin": { "create-vyro-js": "./create-vyro-app/index.js" },
   "keywords": ["vite", "vite-plugin", "mpa", "multi-page", "vue", "react", "vyro"],
   "license": "MIT",

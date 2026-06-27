@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Bridge utilities for mixing React and Vue components — reactToVue, vueToReact.",
-  "main": "index.ts",
-  "exports": { ".": "./index.ts" },
+  "main": "index.js",
+  "exports": { ".": "./index.js" },
   "license": "MIT",
   "peerDependencies": {
     "react": ">=18",

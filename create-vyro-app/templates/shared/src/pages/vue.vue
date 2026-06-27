@@ -1,22 +1,35 @@
 <template>
   <div class="page">
-    <h1>Vue Demo</h1>
+    <h1>Vue Page</h1>
     <p class="subtitle">
-      Pure Vue page — <code>.vue</code> files in <code>src/pages/</code> become routes.
+      Vue page — React component inside it. Any page can use any framework.
     </p>
 
-    <div class="section-label">Vue component</div>
-    <VueCard
-      title="Vue Card"
-      description="This .vue file is a standalone page. No wrappers, no config — just drop it in src/pages/."
-    />
+    <div class="grid">
+      <div>
+        <p class="section-label">Vue component</p>
+        <VueCard
+          title="Vue Card"
+          description="Native Vue component in a Vue page."
+        />
+      </div>
+
+      <div>
+        <p class="section-label">React component in Vue</p>
+        <ReactCounter label="React Counter" :initial="3" />
+      </div>
+    </div>
 
     <a class="back" href="/">← Home</a>
   </div>
 </template>
 
 <script setup>
-import VueCard from '@/components/VueCard.vue'
+import { reactToVue }   from '@vyro/bridge'
+import VueCard          from '@/components/VueCard.vue'
+import ReactCounterRaw  from '@/components/ReactCounter'
+
+const ReactCounter = reactToVue(ReactCounterRaw)
 </script>
 
 <style scoped>
@@ -34,13 +47,13 @@ h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
   color: #666;
   font-size: 0.9rem;
   margin-bottom: 2rem;
+}
 
-  code {
-    color: #a78bfa;
-    background: #1e1e2e;
-    padding: 1px 6px;
-    border-radius: 4px;
-  }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
 }
 
 .section-label {
