@@ -9,7 +9,10 @@
   "keywords": ["vite", "vite-plugin", "mpa", "multi-page", "vue", "react", "vyro"],
   "license": "MIT",
   "scripts": {
-    "test": "cd test/real && npm run dev"
+    "test": "node --test test/unit/discover.test.js test/unit/html.test.js test/integration/build.test.js",
+    "test:unit": "node --test test/unit/discover.test.js test/unit/html.test.js",
+    "test:build": "node --test test/integration/build.test.js",
+    "dev": "cd test/real && npm run dev"
   },
   "peerDependencies": {
     "vite": ">=5.0.0"
