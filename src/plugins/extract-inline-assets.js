@@ -1,6 +1,7 @@
 import { relative } from 'path'
 import fs from 'fs'
 import { discoverEntries } from '../utils/discover.js'
+import { buildExposeFooter } from '../utils/expose-globals.js'
 
 const VIRTUAL_PREFIX = '/@vyro-inline/'
 
@@ -54,9 +55,17 @@ export function extractInlineAssetsPlugin(ctx) {
     },
 
     load(id) {
-      if (id.startsWith('\0vyro-inline:')) {
-        return contentMap.get(id.slice('\0vyro-inline:'.length)) ?? null
-      }
+      if (!id.startsWith('\0vyro-inline:')) return
+      const name    = id.slice('\0vyro-inline:'.length)
+      const content = contentMap.get(name)
+      if (content == null) return null
+      if (!name.endsWith('.js')) return content   // CSS — no scope concern
+
+      // Re-expose top-level declarations as globals so inline event handlers
+      // (onclick="doThing()") still resolve after extraction into a module.
+      const parse  = typeof this?.parse === 'function' ? this.parse.bind(this) : null
+      const footer = buildExposeFooter(content, parse)
+      return footer ? content + footer : content
     },
 
     transformIndexHtml: {

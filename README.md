@@ -80,7 +80,7 @@ Wrappers are never written to disk. Source tree stays untouched.
 
 1. Discover entries
 2. Generate in-memory wrappers for component pages
-3. Extract inline `<style>`/`<script>` from HTML pages into virtual modules
+3. Extract inline `<style>`/`<script>` from HTML pages into virtual modules — top-level declarations in classic inline scripts are re-exposed on `window`, so inline handlers like `onclick="doThing()"` keep working after bundling/minify/obfuscate
 4. Bundle + split vendors: React → `vendor-react`, Vue → `vendor-vue`
 5. Minify HTML (html-minifier-terser)
 6. Pretty URLs — each page emitted flat and as directory index
@@ -170,7 +170,9 @@ create-vyro-app/
   index.js            ← scaffolder CLI (npm create github:suman98/vyro.js)
   templates/          ← JS + TS starter templates
 test/
-  real/               ← local test app (imports plugin from ../../index.js)
+  unit/               ← unit tests (discover, html, expose-globals)
+  integration/        ← sample app build verification
+  sample/             ← full sample app (imports plugin via file:../..)
 ```
 
 ---

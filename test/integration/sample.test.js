@@ -103,3 +103,23 @@ test('inline <script> in index.html is extracted (not left inline)', () => {
   // The template index.html has an inline <script> — plugin extracts it as a module
   assert.ok(!html.includes('function test()'), 'inline script was not extracted')
 })
+
+// ---- Inline event handlers survive extraction (regression: onclick="fn()") ----
+
+test('tools/counter.html keeps its inline onclick handlers', () => {
+  const html = readFileSync(resolve(distDir, 'tools', 'counter.html'), 'utf8')
+  assert.ok(html.includes('onclick="inc()"'),   'lost onclick="inc()"')
+  assert.ok(html.includes('onclick="dec()"'),   'lost onclick="dec()"')
+  assert.ok(html.includes('onclick="reset()"'), 'lost onclick="reset()"')
+})
+
+test('extracted counter JS re-exposes its functions on window', () => {
+  const jsDir = resolve(distDir, 'js')
+  const file  = readdirSync(jsDir).find((f) => f.startsWith('tools-counter'))
+  assert.ok(file, 'no tools-counter bundle emitted')
+  const code = readFileSync(resolve(jsDir, file), 'utf8')
+  // Property names (the bit inline handlers look up) must be preserved verbatim.
+  assert.ok(code.includes('window.inc'),   'window.inc not set')
+  assert.ok(code.includes('window.dec'),   'window.dec not set')
+  assert.ok(code.includes('window.reset'), 'window.reset not set')
+})

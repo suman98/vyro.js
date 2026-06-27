@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inline Counter</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; background: #0f0f11; color: #e2e2e8; }
+    button { padding: 8px 16px; margin-right: 8px; cursor: pointer; }
+    #out { font-size: 2rem; font-weight: 700; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Inline handlers must survive build</h1>
+  <button onclick="inc()">+</button>
+  <button onclick="dec()">−</button>
+  <button onclick="reset()">Reset</button>
+  <div id="out">0</div>
+
+  <script>
+    let count = 0
+    function render() { document.getElementById('out').textContent = String(count) }
+    function inc()   { count++; render() }
+    function dec()   { count--; render() }
+    function reset() { count = 0; render() }
+    render()
+  </script>
+</body>
+</html>
